@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Urbanist:wght@400;700&display=swap');
+
+/* Apply the fonts globally */
+body {
+    font-family: 'Urbanist', sans-serif;
+    background-size: cover;
+    background:fixed center no-repeat;
+}
+
+/* Glassmorphism effect for the login card */
+.glassmorphic {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Custom styles for form input fields */
+input {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Apply additional custom styling to buttons, headers, etc. */
+button {
+    font-family: 'Urbanist', sans-serif;
+}
+
+/* Optional: Add other custom styles here */
+
