@@ -225,7 +225,7 @@ const Schedules = () => {
   <div className="mt-4 h-[150px] overflow-y-auto px-3 rounded-lg text-white">
     {faults.length === 0 ? (
       <div className="flex items-center justify-center h-full">
-        <p className="text-center text-sm md:text-xl font-semibold md:mb-10">
+        <p className="text-center text-sm md:text-xl lg:text-2xl font-semibold md:mb-10">
           No faults detected
         </p>
       </div>
@@ -239,7 +239,7 @@ const Schedules = () => {
             <div>
               <p className="text-xs md:text-lg font-medium">{fault.message}</p>
               <span className="text-xs md:text-base text-gray-200">
-              {new Date().toLocaleDateString()}, {fault.timestamp}
+              {new Date().toLocaleDateString('en-GB')}, {fault.timestamp}
              </span>
             </div>
             <button
