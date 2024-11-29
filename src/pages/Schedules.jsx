@@ -21,7 +21,7 @@ const Schedules = () => {
         localStorage.setItem("faults", JSON.stringify(updatedFaults)); // Save to localStorage
         return updatedFaults;
       });
-    }, 5000); // Simulate a fault every 5 seconds
+    }, 12000); // Simulate a fault every 5 seconds
     return () => clearInterval(faultInterval); // Cleanup on unmount
   }, []);
 
@@ -216,9 +216,7 @@ const Schedules = () => {
   <div className="flex justify-between items-center mb-2">
     <div>
       <h2 className="text-sm md:text-lg font-semibold ml-3">FAULT LOGGER</h2>
-      <p className="text-xs md:text-lg ml-3 text-gray-300">
-        {new Date().toLocaleDateString()}
-      </p>
+      
     </div>
     <FaExclamationTriangle className="text-white mr-1 text-lg md:text-2xl" />
   </div>
@@ -241,8 +239,8 @@ const Schedules = () => {
             <div>
               <p className="text-xs md:text-lg font-medium">{fault.message}</p>
               <span className="text-xs md:text-base text-gray-200">
-                {fault.timestamp}
-              </span>
+              {new Date().toLocaleDateString()}, {fault.timestamp}
+             </span>
             </div>
             <button
               onClick={() => clearFault(fault.id)}
