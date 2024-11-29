@@ -15,6 +15,31 @@ import predictionicon from '../assets/material-symbols_online-prediction.svg';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const RULPrediction = () => {
+  const [isFanOn, setIsFanOn] = useState(false); // Initialize fan state
+  const BLYNK_TOKEN = 'NeH_XSSxqf7vskrAKsdkgE7XQ-gtlogi'; // Replace with your Auth Token
+  const API_URL = 'https://blynk.cloud/external/api/update';
+
+  const startFan = async () => {
+    try {
+      const response = await fetch(`${API_URL}?token=${BLYNK_TOKEN}&V1=1`);
+      const data = await response.text();
+      console.log('Fan ON:', data);
+      setIsFanOn(true); // Update fan state to ON
+    } catch (error) {
+      console.error('Error starting fan:', error);
+    }
+  };
+
+  const stopFan = async () => {
+    try {
+      const response = await fetch(`${API_URL}?token=${BLYNK_TOKEN}&V1=0`);
+      const data = await response.text();
+      console.log('Fan OFF:', data);
+      setIsFanOn(false); // Update fan state to OFF
+    } catch (error) {
+      console.error('Error stopping fan:', error);
+    }
+  };
   const [rulReadings, setRulReadings] = useState(() => {
     const savedReadings = localStorage.getItem('rulReadings');
     return savedReadings ? JSON.parse(savedReadings) : [];
@@ -139,7 +164,12 @@ const RULPrediction = () => {
         {/* Header */}
         <div className="flex flex-wrap justify-center md:justify-between items-center mb-8">
           {/* Start Monitoring Button */}
-          <button className="bg-[#387A79] text-white hidden md:block lg:block px-6 py-2 rounded-3xl hover:bg-teal-600">
+          <button
+            onClick={startFan}
+            className={`${
+              isFanOn? "bg-gray-400":"bg-[#387A79] hover:bg-teal-600"
+            } text-white hidden md:block px-6 py-2 rounded-3xl transition-all duration-300`}
+          >
             Start Monitoring
           </button>
 
@@ -149,24 +179,35 @@ const RULPrediction = () => {
           </h1>
 
           {/* Stop Monitoring Button */}
-          <button className="bg-[#BE4848] text-white hidden md:block lg:block px-6 py-2 rounded-3xl hover:bg-red-600 md:ml-auto">
+          <button
+            onClick={stopFan}
+            className={`${
+              isFanOn? "bg-[#BE4848] hover:bg-red-600": "bg-gray-400"
+            } text-white hidden md:block px-6 py-2 rounded-3xl transition-all duration-300`}
+          >
             Stop Monitoring
           </button>
         </div>
         <div className="fixed bottom-0 left-0 w-full bg-white shadow-lg z-50 md:hidden">
-            <div className="flex justify-between">
-              <button
-                className="w-1/2 bg-[#387A79] text-white py-3 text-center hover:bg-teal-600 rounded-none"
-              >
-                Start
-              </button>
-              <button
-                className="w-1/2 bg-[#BE4848] text-white py-3 text-center hover:bg-red-600 rounded-none"
-              >
-                Stop
-              </button>
-            </div>
-          </div>
+      <div className="flex justify-between">
+        <button
+          onClick={startFan}
+          className={`w-1/2 ${
+            isFanOn ? "bg-gray-400" : "bg-[#387A79] hover:bg-teal-600"
+          } text-white py-3 text-center rounded-none`}
+        >
+          Start
+        </button>
+        <button
+          onClick={stopFan}
+          className={`w-1/2 ${
+            isFanOn ? "bg-[#BE4848] hover:bg-red-600" : "bg-gray-400"
+          } text-white py-3 text-center rounded-none`}
+        >
+          Stop
+        </button>
+      </div>
+    </div>
         {/* Grid Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 lg:gap-x-6">
           {/* Left Card */}

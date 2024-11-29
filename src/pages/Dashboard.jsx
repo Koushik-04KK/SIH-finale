@@ -128,7 +128,7 @@ const Dashboard = () => {
         <div className="bg-customColor-rmcardbackground rounded-lg shadow-xl p-4 md:p-6 lg:p-8 w-full max-w-[1300px]">
           <div className="flex flex-wrap justify-center items-center mb-8 md:justify-between">
           <button
-            onClick={stopFan}
+            onClick={startFan}
             className={`${
               isFanOn? "bg-gray-400":"bg-[#387A79] hover:bg-teal-600"
             } text-white hidden md:block px-6 py-2 rounded-3xl transition-all duration-300`}
@@ -139,7 +139,7 @@ const Dashboard = () => {
             REALTIME METRICS
           </h1>
           <button
-            onClick={startFan}
+            onClick={stopFan}
             className={`${
               isFanOn? "bg-[#BE4848] hover:bg-red-600": "bg-gray-400"
             } text-white hidden md:block px-6 py-2 rounded-3xl transition-all duration-300`}
@@ -159,19 +159,25 @@ const Dashboard = () => {
 
   
 <div className="fixed bottom-0 left-0 w-full bg-white shadow-lg z-50 md:hidden">
-            <div className="flex justify-between">
-              <button
-                className="w-1/2 bg-[#387A79] text-white py-3 text-center hover:bg-teal-600 rounded-none"
-              >
-                Start
-              </button>
-              <button
-                className="w-1/2 bg-[#BE4848] text-white py-3 text-center hover:bg-red-600 rounded-none"
-              >
-                Stop
-              </button>
-            </div>
-          </div>
+      <div className="flex justify-between">
+        <button
+          onClick={startFan}
+          className={`w-1/2 ${
+            isFanOn ? "bg-gray-400" : "bg-[#387A79] hover:bg-teal-600"
+          } text-white py-3 text-center rounded-none`}
+        >
+          Start
+        </button>
+        <button
+          onClick={stopFan}
+          className={`w-1/2 ${
+            isFanOn ? "bg-[#BE4848] hover:bg-red-600" : "bg-gray-400"
+          } text-white py-3 text-center rounded-none`}
+        >
+          Stop
+        </button>
+      </div>
+    </div>
   
         <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-8 md:grid md:grid-cols-3 md:gap-8 md:flex-row lg:flex-row">
           <div className="flex flex-col gap-4 md:gap-6 lg:gap-6">
